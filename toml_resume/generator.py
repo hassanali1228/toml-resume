@@ -87,7 +87,7 @@ def add_work_experience(
 
     writer.add_line(f"{{{title_table[role]}}}")
     writer.add_line(
-        f"{{{experience['location']}}} {{{experience['date_range']}}} \\vspace{{3.2 pt}}"
+        f"{{\\bf {experience['location']}}} {{{experience['date_range']}}} \\vspace{{3.2 pt}}"
     )
 
     order_table = parse_role_table(experience["order"])
@@ -110,8 +110,8 @@ def add_project(writer: ResumeWriter, project: dict[str, list[str]]) -> None:
     else:
         line += (
             f"{{\href{{{project['url']}}}{{\\textcolor{{darkblue}}{{{project['name']}}}"
+            f"\color{{black}} - {tool_list} \\faicon{{{project['favicon']}}}}}}}"
         )
-        line += f"\color{{black}} - {tool_list} \\faicon{{{project['favicon']}}}}}}}"
     writer.add_line(line)
 
     writer.indent()
@@ -140,7 +140,7 @@ def add_education(writer: ResumeWriter, education: dict[str, str]) -> None:
 
     for item in education["content"]:
         key, val = item.values()
-        writer.add_line(f"\\item \\textbf{{\\textcolor{{darkblue}}{{{key}}}}}: {val}")
+        writer.add_line(f"\\item {{\\textcolor{{darkblue}}{{{key}}}}}: {val}")
 
     writer.dedent()
     writer.add_line("\end{nobulletsubitems}")
@@ -195,10 +195,16 @@ def generator(
         "projects": (add_projects, resume_writer,),
     }
 
-    if colored_resume:
-        resume_writer.latex_str += start
-    else:
-        resume_writer.latex_str += grayscale_start
+    resume_writer.latex_str = (
+        metadata +
+        (resume_section_colored_template if colored_resume else resume_section_greyscale_template) +
+        resume_subsection_template +
+        resume_education_template +
+        resume_subitems_template +
+        resume_nobulletsubitems_template +
+        (resume_employer_colored_template if colored_resume else resume_employer_greyscale_template) +
+        (colored_start if colored_resume else grayscale_start)
+    )
 
     resume_writer.add_line("")
 
@@ -215,13 +221,9 @@ def generator(
     return resume_writer.latex_str
 
 
-def main():
+if __name__ == "__main__":
     toml_dict = toml.load("resume.toml")
     config = toml_dict["config"]
     del toml_dict["config"]
 
     print(generator(toml_dict, **config))
-
-
-if __name__ == "__main__":
-    main()

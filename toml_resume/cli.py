@@ -3,7 +3,6 @@ import toml
 from pathlib import Path
 import subprocess
 import os
-import logging
 
 from .generator import generator
 
@@ -17,9 +16,10 @@ from .generator import generator
     type=click.Choice(["tex", "pdf"], case_sensitive=False),
     default="tex",
 )
+@click.option("--i", is_flag=True, default=False, help="interactive mode: open pdf")
 @click.argument('toml_path', type=click.Path(exists=True, dir_okay=False))
 @click.argument('out_path', type=click.Path(dir_okay=False))
-def toml_resume(role: str, color: bool, mission: bool, stdout: list[str], toml_path: Path, out_path: Path):
+def toml_resume(role: str, color: bool, mission: bool, stdout: list[str], toml_path: Path, out_path: Path, i: bool):
     """Generate a resume from a TOML file.
     """
     toml_path = Path(toml_path)
@@ -41,9 +41,13 @@ def toml_resume(role: str, color: bool, mission: bool, stdout: list[str], toml_p
         try:
             subprocess.call(['pdflatex', '-interaction=nonstopmode', tex_path])
         except:
-            logging.error("pdflatex failed")
+            raise ValueError("pdflatex failed to compile the .tex file")
         finally:
-            os.remove(tex_path)
-            os.remove(out_path.with_suffix(".log"))
-            os.remove(out_path.with_suffix(".aux"))
-            os.remove(out_path.with_suffix(".out"))
+            if os.path.exists(tex_path): os.remove(tex_path)
+            if os.path.exists(out_path.with_suffix(".log")): os.remove(out_path.with_suffix(".log"))
+            if os.path.exists(out_path.with_suffix(".aux")): os.remove(out_path.with_suffix(".aux"))
+            if os.path.exists(out_path.with_suffix(".out")): os.remove(out_path.with_suffix(".out"))
+
+        if i:
+            # mac os only implementation
+            subprocess.call(('open', out_path.with_suffix(".pdf")))

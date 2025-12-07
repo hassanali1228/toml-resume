@@ -1,7 +1,6 @@
 [config]
 enable_grayscale = false
 include_mission = false
-education_first = false
 role = "sre"
 
 [profile]
@@ -27,10 +26,27 @@ display = "911"
 favicon = "Phone"
 url = "tel:+1000"
 
+[education]
+school = "Carnegie Melon"
+degree = '''Engineer in Cool Stuff, GPA: {\bf 4.5}/4.0'''
+date_range = "2020 - 2023"
+
+# [[education.content]]
+# key = "GPA"
+# value = '''{\bf 4.5}/4.0'''
+
+[[education.content]]
+key = "Relevant Courses"
+value = '''Woo, Yeah, I, Love, Engineering'''
+
+#[[education.content]]
+#key = "Awards"
+#value = '''Best Student Ever, Cool Award, Outstanding Achievement'''
+
 [skills]
 Languages = ["Python", "C", "C++", "SQL", "JavaScript", "Java", "Verilog", "Bash"]
 Frameworks = ["Flask", "Node.js", "MQTT", "WebSockets", "Pytest", "Pantsbuild", "Pandas"]
-Tools = ["Linux", "Redis", "Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana", "MySQL", "GCP", "Git"]
+Infra = ["Linux", "Redis", "Docker", "Kubernetes", "Jenkins", "Prometheus", "Grafana", "MySQL", "GCP", "Git"]
 
 [[work_experiences]]
 company = "DNAStack"
@@ -38,16 +54,20 @@ mission = "Fueling health research: scientists united, data secure, AI optimized
 location = "Toronto, ON"
 date_range = "Jan 2024 - Present"
 content = [
-    '''Hello'''
+    '''Did something with {\bf 85\%} improvement and multi-megawatt scale deployments''',
+    '''Built framework eliminating {\bf 20\%} of failures through distributed logging validation''',
+    '''Implemented coverage for critical workflows supporting important business pipelines'''
 ]
 
 [work_experiences.title]
-sre = "Solutions Engineer Intern"
-dev = "Cloud Developer Intern"
+systems = "Systems Engineer"
+sre = "systems"
+dev = "systems"
 
 [work_experiences.order]
-sre = [0]
-dev = [0]
+sre = [0, 1, 2, 3]
+dev = "sre"
+systems = "sre"
 
 [[work_experiences]]
 company = "Databento"
@@ -55,19 +75,23 @@ mission = "A simpler, faster way to get market data"
 location = "Boston, MA"
 date_range = "June 2023 - Aug 2023"
 content = [
-    '''Did something''',
-    '''Did something else''',
-    '''Did something else''',
-    '''Did something else'''
+    # Alternative content for different contexts:
+    # '''Built state machine logic for complex distributed pipeline visibility''',
+    
+    '''Built state machine to aggregate statuses providing end-to-end visibility for customer escalations''',
+    '''Implemented interface layer in python to expose configurations for live status updates''',
+    '''Debugged critical issue in production systems increasing storage by {\bf 5\%}''',
 ]
 
 [work_experiences.title]
-sre = "DevOps Engineer Intern"
-dev = "Software Developer Intern"
+sre = "Software Engineer Intern"
+dev = "Software Engineer Intern"
+systems = "sre"
 
 [work_experiences.order]
 sre = [0, 1, 2, 3]
-dev = [3, 1, 2, 0]
+dev = "sre"
+systems = "sre"
 
 [[work_experiences]]
 company = "Stealth Media"
@@ -75,19 +99,20 @@ mission = "Elevate your party experience, one game at a time"
 location = "Saskatoon, SK"
 date_range = "Sep 2022 - Dec 2022"
 content = [
-    '''Did something''',
-    '''Did something else''',
-    '''Did something else''',
-    '''Did something else'''
+    '''Architected WebSocket Pub/Sub network using C++ and Node.js, supporting {\bf 1000+} players''',
+    '''Developed C++ algorithms to generate & solve relational puzzles for responsive gameplay''',
+    '''Built control interface to automate equipment calibration, reducing setup time by {\bf 80\%}'''
 ]
 
 [work_experiences.title]
-sre = "Systems Engineer Intern"
+sre = "Founding Engineer"
 dev = "sre"
+systems = "sre"
 
 [work_experiences.order]
-sre = [0, 1, 2, 3]
-dev = [0, 2, 3, 1]
+sre = [0, 1, 2]
+dev = [1, 0, 2]
+systems = "sre"
 
 [[work_experiences]]
 company = "Citadel LLC"
@@ -95,19 +120,21 @@ mission = "Drive capital to the world’s most impactful and compelling investme
 location = "Chicago, IL"
 date_range = "Jan 2022 - Apr 2022"
 content = [
-    '''Did something''',
-    '''Did something else''',
-    '''Did something else''',
-    '''Did something else'''
+    '''Boosted firm-wide scalability and cut provisioning time in half using dependency trees and Kubernetes''',
+    '''Versioned releases using git to support garbage collection, cutting storage and operational costs''',
+    '''Reduced average build time by {\bf 80\%} by leveraging immutability for concurrent builds''',
+    # '''Additional achievement with {\bf 2-3 hours} recovery time improvement'''
 ]
 
 [work_experiences.title]
 sre = "Linux Engineer Intern"
 dev = "Software Engineer Intern"
+systems = "sre"
 
 [work_experiences.order]
 sre = [0, 1, 2, 3]
 dev = "sre"
+systems = "sre"
 
 [[work_experiences]]
 company = "Questrade"
@@ -124,38 +151,35 @@ content = [
 [work_experiences.title]
 sre = "Infrastructure Engineer Intern"
 dev = "sre"
+systems = "sre"
 
 [work_experiences.order]
-sre = [0, 1, 2, 3]
-dev = "sre"
+sre = [0, 1, 3]
+dev = "systems"
+systems = [0, 2, 3]
 
 [[projects]]
-name = "RTOS YESS"
-tools = ["C", "x86 Assembly"]
-content = [
-    '''Did something''',
-    '''Did something else'''
-]
-
-[[projects]]
-name = "TT SIGMA"
+name = "Invenstory "
 favicon = "link"
-url = "https://github.com/"
-tools = ["Node.js", "SQL"]
+url = "https://example.com/blog/2024/invenstory/"
+tools = ["RabbitMQ", "Docker", "Prometheus", "MySQL"]
 content = [
-    '''Did something''',
-    '''Did something else'''
+    '''Built low overhead decentralized inventory management for small businesses using WiFi fingerprinting and RFID''',
 ]
 
-[education]
-school = "Carnegie Melon"
-degree = "Engineer 😎"
-date_range = "2020 - 2023"
+[[projects]]
+name = "GPU Accelerated Neural Network"
+tools = ["Rust", "CUDA"]
+content = [
+    '''Optimized a simplified CNN using GPU acceleration via CUDA, achieving {\bf 10x} speedup over CPU-only implementation''',
+    '''Implemented matrix multiplication and convolutional layers in Rust, and optimized memory access patterns for GPU cores'''
+]
 
-[[education.content]]
-key = "GPA"
-value = '''{\bf 4.5}/4.0'''
-
-[[education.content]]
-key = "Relevant Courses"
-value = '''Woo, Yeah, I, Love, Engineering'''
+[[projects]]
+name = "Real-Time OS for Intel DE1-SoC"
+tools = ["C", "ARM"]
+content = [
+    '''Built an RTOS image for embedded systems that supports multi-tasking and IPC, achieving {\bf 1st place} for heap util''',
+    # '''Implemented efficient memory syscalls, achieving {\bf 1st place} for heap util, using bit manipulation and segmentatation''',
+    # '''Supported predictable multi-tasking operations with strict-prio scheduler (min-heap), and asynchronous IPC'''
+]
